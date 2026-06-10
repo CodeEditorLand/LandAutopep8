@@ -66,137 +66,140 @@ There are several settings you can configure to customize the behavior of this e
 			<td>
 				Arguments passed to autopep8 to format Python files. Each argument should be provided as a separate string in the array. Example:
 				<code>
-					"autopep8.args" = ["--config", "<file>"]
+					"autopep8.args" = ["--config", "
+					<file>
+						"]
+						<tr>
+							<td>
+								autopep8.cwd
+							</td>
+							<td>
+								<code>
+									${workspaceFolder}
+								</code>
+							</td>
+							<td>
+								Sets the current working directory used to format Python files with autopep8. By default, it uses the root directory of the workspace
+								<code>
+									${workspaceFolder}
+								</code>
+								. You can set it to
+								<code>
+									${fileDirname}
+								</code>
+								to use the parent folder of the file being formatted as the working directory for autopep8.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								autopep8.path
+							</td>
+							<td>
+								<code>
+									[]
+								</code>
+							</td>
+							<td>
+								Path or command to be used by the extension to format Python files with autopep8. Accepts an array of a single or multiple strings. If passing a command, each argument should be provided as a separate string in the array. If set to
+								<code>
+									["autopep8"]
+								</code>
+								, it will use the version of autopep8 available in the
+								<code>
+									PATH
+								</code>
+								environment variable. Note: Using this option may slowdown formatting.
+								<br />
+								Examples:
+								<br />
+								<code>
+									["~/global_env/autopep8"]
+								</code>
+								<br />
+								<code>
+									["conda", "run", "-n", "lint_env", "python", "-m", "autopep8"]
+								</code>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								autopep8.interpreter
+							</td>
+							<td>
+								<code>
+									[]
+								</code>
+							</td>
+							<td>
+								Path to a Python executable or a command that will be used to launch the autopep8 server and any subprocess. Accepts an array of a single or multiple strings. When set to
+								<code>
+									[]
+								</code>
+								, the extension will use the path to the selected Python interpreter. If passing a command, each argument should be provided as a separate string in the array.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								autopep8.importStrategy
+							</td>
+							<td>
+								<code>
+									useBundled
+								</code>
+							</td>
+							<td>
+								Defines which autopep8 formatter binary to be used to format Python files. When set to
+								<code>
+									useBundled
+								</code>
+								, the extension will use the autopep8 formatter binary that is shipped with the extension. When set to
+								<code>
+									fromEnvironment
+								</code>
+								, the extension will attempt to use the autopep8 formatter binary and all dependencies that are available in the currently selected environment.
+								<br />
+								Note: If the extension can't find a valid autopep8 formatter binary in the selected environment, it will fallback to using the binary that is shipped with the extension. The
+								<code>
+									autopep8.path
+								</code>
+								setting takes precedence and overrides the behavior of
+								<code>
+									autopep8.importStrategy
+								</code>
+								.
+							</td>
+						</tr>
+						<tr>
+							<td>
+								autopep8.showNotification
+							</td>
+							<td>
+								<code>
+									off
+								</code>
+							</td>
+							<td>
+								Controls when notifications are shown by this extension. Accepted values are
+								<code>
+									onError
+								</code>
+								,
+								<code>
+									onWarning
+								</code>
+								,
+								<code>
+									always
+								</code>
+								and
+								<code>
+									off
+								</code>
+								.
+							</td>
+						</tr>
+					</file>
 				</code>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				autopep8.cwd
-			</td>
-			<td>
-				<code>
-					${workspaceFolder}
-				</code>
-			</td>
-			<td>
-				Sets the current working directory used to format Python files with autopep8. By default, it uses the root directory of the workspace
-				<code>
-					${workspaceFolder}
-				</code>
-				. You can set it to
-				<code>
-					${fileDirname}
-				</code>
-				to use the parent folder of the file being formatted as the working directory for autopep8.
-			</td>
-		</tr>
-		<tr>
-			<td>
-				autopep8.path
-			</td>
-			<td>
-				<code>
-					[]
-				</code>
-			</td>
-			<td>
-				Path or command to be used by the extension to format Python files with autopep8. Accepts an array of a single or multiple strings. If passing a command, each argument should be provided as a separate string in the array. If set to
-				<code>
-					["autopep8"]
-				</code>
-				, it will use the version of autopep8 available in the
-				<code>
-					PATH
-				</code>
-				environment variable. Note: Using this option may slowdown formatting.
-				<br />
-				Examples:
-				<br />
-				<code>
-					["~/global_env/autopep8"]
-				</code>
-				<br />
-				<code>
-					["conda", "run", "-n", "lint_env", "python", "-m", "autopep8"]
-				</code>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				autopep8.interpreter
-			</td>
-			<td>
-				<code>
-					[]
-				</code>
-			</td>
-			<td>
-				Path to a Python executable or a command that will be used to launch the autopep8 server and any subprocess. Accepts an array of a single or multiple strings. When set to
-				<code>
-					[]
-				</code>
-				, the extension will use the path to the selected Python interpreter. If passing a command, each argument should be provided as a separate string in the array.
-			</td>
-		</tr>
-		<tr>
-			<td>
-				autopep8.importStrategy
-			</td>
-			<td>
-				<code>
-					useBundled
-				</code>
-			</td>
-			<td>
-				Defines which autopep8 formatter binary to be used to format Python files. When set to
-				<code>
-					useBundled
-				</code>
-				, the extension will use the autopep8 formatter binary that is shipped with the extension. When set to
-				<code>
-					fromEnvironment
-				</code>
-				, the extension will attempt to use the autopep8 formatter binary and all dependencies that are available in the currently selected environment.
-				<br />
-				Note: If the extension can't find a valid autopep8 formatter binary in the selected environment, it will fallback to using the binary that is shipped with the extension. The
-				<code>
-					autopep8.path
-				</code>
-				setting takes precedence and overrides the behavior of
-				<code>
-					autopep8.importStrategy
-				</code>
-				.
-			</td>
-		</tr>
-		<tr>
-			<td>
-				autopep8.showNotification
-			</td>
-			<td>
-				<code>
-					off
-				</code>
-			</td>
-			<td>
-				Controls when notifications are shown by this extension. Accepted values are
-				<code>
-					onError
-				</code>
-				,
-				<code>
-					onWarning
-				</code>
-				,
-				<code>
-					always
-				</code>
-				and
-				<code>
-					off
-				</code>
-				.
 			</td>
 		</tr>
 	</tbody>
